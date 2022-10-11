@@ -12,13 +12,13 @@ namespace Infrastructure.Bus
     {
         private readonly IMediator _mediator;
 
-        private readonly Dictionary<string, List<Type>> _handles;
+        private readonly Dictionary<string, List<Type>> _handlers;
         private readonly List<Type> _eventTypes;
 
         public RabbitMQBus(IMediator mediator)
         {
             _mediator = mediator;
-            _handles = new Dictionary<string, List<Type>>();
+            _handlers = new Dictionary<string, List<Type>>();
             _eventTypes = new List<Type>();
         }
 
@@ -50,7 +50,25 @@ namespace Infrastructure.Bus
             where T : Event
             where THandler : IEventHandler<T>
         {
-            throw new NotImplementedException();
+            string eventName = typeof(T).Name;
+            Type handlerType = typeof(THandler);
+
+            if (!_eventTypes.Contains(typeof(T)))
+            {
+                _eventTypes.Add(typeof(T));
+            }
+
+            if (!_handlers.ContainsKey(eventName))
+            {
+                _handlers.Add(eventName, new List<Type>());
+            }
+
+            if (_handlers[eventName].Any(s => s.GetType() == handlerType))
+            {
+                throw new ArgumentException($"Handler Type {handlerType.Name} has already registered for `{eventName}` ", nameof(handlerType);
+            }
+
+            _handlers[eventName].Add(handlerType);
         }
     }
 }
