@@ -1,4 +1,7 @@
-﻿namespace Domain.Core.Bus
+﻿using Domain.Core.Commands;
+using Domain.Core.Events;
+
+namespace Domain.Core.Bus
 {
     public interface IEventBus
     {
@@ -7,7 +10,7 @@
         public void Publish<T>(T @event) where T : Event;
 
         public void Subscribe<T, THandler>() where T : Event
-                                            where THandler : IEventHandler<T>
+                                            where THandler : IEventHandler<T>;
 
     }
 }
