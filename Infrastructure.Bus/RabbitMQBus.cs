@@ -2,6 +2,9 @@
 using Domain.Core.Commands;
 using Domain.Core.Events;
 using MediatR;
+using Newtonsoft.Json;
+using RabbitMQ.Client;
+using System.Text;
 
 namespace Infrastructure.Bus
 {
@@ -26,7 +29,21 @@ namespace Infrastructure.Bus
 
         public void Publish<T>(T @event) where T : Event
         {
-            throw new NotImplementedException();
+            var factory = new ConnectionFactory() { HostName = "localhost" };
+            using (var connection = factory.CreateConnection())
+            {
+                using (var channel = connection.CreateModel())
+                {
+                    var eventName = @event.GetType().Name;
+                    channel.QueueDeclare(eventName, false, false, false, null);
+
+                    var message = JsonConvert.SerializeObject(@event);
+                    var body = Encoding.UTF8.GetBytes(message);
+
+                    channel.BasicPublish("", eventName, null, body);
+                }
+            }
+
         }
 
         public void Subscribe<T, THandler>()
