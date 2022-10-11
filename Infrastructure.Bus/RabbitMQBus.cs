@@ -9,6 +9,16 @@ namespace Infrastructure.Bus
     {
         private readonly IMediator _mediator;
 
+        private readonly Dictionary<string, List<Type>> _handles;
+        private readonly List<Type> _eventTypes;
+
+        public RabbitMQBus(IMediator mediator)
+        {
+            _mediator = mediator;
+            _handles = new Dictionary<string, List<Type>>();
+            _eventTypes = new List<Type>();
+        }
+
         public Task SendCommand<T>(T command) where T : Command
         {
             return _mediator.Send(command);
