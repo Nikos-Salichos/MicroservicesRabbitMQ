@@ -95,8 +95,10 @@ namespace Infrastructure.Bus
             channel.BasicConsume(eventName, true, consumer);
         }
 
-        private async Task Consumer_Received(object sender, BasicDeliverEventArgs @event)
+        private async Task Consumer_Received(object sender, BasicDeliverEventArgs e)
         {
+            string eventName = e.RoutingKey;
+            string message = Encoding.UTF8.GetString(e.Body.Span);
 
         }
     }
