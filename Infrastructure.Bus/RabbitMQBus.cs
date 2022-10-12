@@ -95,9 +95,9 @@ namespace Infrastructure.Bus
             channel.BasicConsume(eventName, true, consumer);
         }
 
-        private Task Consumer_Received(object sender, BasicDeliverEventArgs @event)
+        private async Task Consumer_Received(object sender, BasicDeliverEventArgs @event)
         {
-            throw new NotImplementedException();
+
         }
     }
 }
