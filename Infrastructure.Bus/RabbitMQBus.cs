@@ -100,6 +100,18 @@ namespace Infrastructure.Bus
             string eventName = e.RoutingKey;
             string message = Encoding.UTF8.GetString(e.Body.Span);
 
+            try
+            {
+                await ProcessEvent(eventName, message).ConfigureAwait(false);
+            }
+            catch (Exception exception)
+            {
+            }
+        }
+
+        private async Task ProcessEvent(string eventName, string message)
+        {
+            throw new NotImplementedException();
         }
     }
 }
