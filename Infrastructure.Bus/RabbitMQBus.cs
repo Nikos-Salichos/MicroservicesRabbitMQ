@@ -4,6 +4,7 @@ using Domain.Core.Events;
 using MediatR;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
+using RabbitMQ.Client.Events;
 using System.Text;
 
 namespace Infrastructure.Bus
@@ -69,6 +70,34 @@ namespace Infrastructure.Bus
             }
 
             _handlers[eventName].Add(handlerType);
+
+            StartBasicConsume<T>();
+        }
+
+        private void StartBasicConsume<T>() where T : Event
+        {
+            ConnectionFactory connectionFactory = new ConnectionFactory()
+            {
+                HostName = "localhost",
+                DispatchConsumersAsync = true
+            };
+
+            IConnection connection = connectionFactory.CreateConnection();
+            IModel channel = connection.CreateModel();
+
+            string eventName = typeof(T).Name;
+
+            channel.QueueDeclare(eventName, false, false, false, null);
+
+            AsyncEventingBasicConsumer consumer = new AsyncEventingBasicConsumer(channel);
+            consumer.Received += Consumer_Received;
+
+            channel.BasicConsume(eventName, true, consumer);
+        }
+
+        private Task Consumer_Received(object sender, BasicDeliverEventArgs @event)
+        {
+            throw new NotImplementedException();
         }
     }
 }
