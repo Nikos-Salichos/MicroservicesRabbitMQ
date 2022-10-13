@@ -66,7 +66,7 @@ namespace Infrastructure.Bus
 
             if (_handlers[eventName].Any(s => s.GetType() == handlerType))
             {
-                throw new ArgumentException($"Handler Type {handlerType.Name} has already registered for `{eventName}` ", nameof(handlerType);
+                throw new ArgumentException($"Handler Type {handlerType.Name} has already registered for `{eventName}` ", nameof(handlerType));
             }
 
             _handlers[eventName].Add(handlerType);
@@ -111,7 +111,22 @@ namespace Infrastructure.Bus
 
         private async Task ProcessEvent(string eventName, string message)
         {
-            throw new NotImplementedException();
+            if (_handlers.ContainsKey(eventName))
+            {
+                var subscriptions = _handlers[eventName];
+                foreach (var subscription in subscriptions)
+                {
+                    object? handler = Activator.CreateInstance(subscription);
+                    if (handler == null)
+                    {
+                        continue;
+                    }
+                    Type? eventType = _eventTypes.FirstOrDefault(t => t.Name == eventName);
+                    object? @event = JsonConvert.DeserializeObject(message, eventType);
+                    Type concreteType = typeof(IEventHandler<>).MakeGenericType(eventType);
+                    await (Task)concreteType.GetMethod("Handle").Invoke(handler, new object[] { @event });
+                }
+            }
         }
     }
 }

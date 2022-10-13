@@ -15,7 +15,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentatio
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain.Core", "Domain.Core\Domain.Core.csproj", "{48D5B8BE-3DC1-42FF-85AD-9FAFBCA4F510}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.Bus", "Infrastructure.Bus\Infrastructure.Bus.csproj", "{C7580528-EC8F-4A96-A6B5-ABDDFB2FBB08}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure.Bus", "Infrastructure.Bus\Infrastructure.Bus.csproj", "{C7580528-EC8F-4A96-A6B5-ABDDFB2FBB08}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
