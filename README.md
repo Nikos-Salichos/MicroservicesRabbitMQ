@@ -1,1 +1,1 @@
-.NET 6 Project 
+.NET 6 Project with clean architecture
