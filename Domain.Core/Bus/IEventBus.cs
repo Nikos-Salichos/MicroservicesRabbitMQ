@@ -10,7 +10,7 @@ namespace Domain.Core.Bus
         public void Publish<T>(T @event) where T : Event;
 
         public void Subscribe<T, THandler>() where T : Event
-                                            where THandler : IEventHandler<T>;
+                                             where THandler : IEventHandler<T>;
 
     }
 }
