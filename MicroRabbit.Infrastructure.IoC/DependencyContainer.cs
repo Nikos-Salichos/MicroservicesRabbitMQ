@@ -4,12 +4,14 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace MicroRabbit.Infrastructure.IoC
 {
-    public class DependencyContainer
+    public static class DependencyContainer
     {
         public static void Register(IServiceCollection services)
         {
             //Domain Bus
             services.AddTransient<IEventBus, RabbitMQBus>();
+
+
         }
     }
 }

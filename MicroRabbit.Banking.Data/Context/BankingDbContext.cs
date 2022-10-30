@@ -10,6 +10,6 @@ namespace MicroRabbit.Banking.Data.Context
 
         }
 
-        public DbSet<Account> Accounts;
+        public DbSet<Account> Accounts { get; set; }
     }
 }
