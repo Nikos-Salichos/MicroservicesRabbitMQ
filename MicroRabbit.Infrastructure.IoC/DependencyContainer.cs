@@ -1,5 +1,7 @@
 ﻿using Domain.Core.Bus;
 using Infrastructure.Bus;
+using MicroRabbit.Banking.Application.Interfaces;
+using MicroRabbit.Banking.Application.Services;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace MicroRabbit.Infrastructure.IoC
@@ -10,6 +12,9 @@ namespace MicroRabbit.Infrastructure.IoC
         {
             //Domain Bus
             services.AddTransient<IEventBus, RabbitMQBus>();
+
+            //Application Services
+            services.AddTransient<IAccountService, AccountService>();
 
 
         }
