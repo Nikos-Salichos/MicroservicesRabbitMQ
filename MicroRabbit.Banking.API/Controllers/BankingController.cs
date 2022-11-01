@@ -21,5 +21,7 @@ namespace MicroRabbit.Banking.API.Controllers
         {
             return Ok(_accountService.GetAccounts());
         }
+
+
     }
 }
