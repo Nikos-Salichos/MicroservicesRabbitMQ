@@ -31,20 +31,15 @@ namespace Infrastructure.Bus
         public void Publish<T>(T @event) where T : Event
         {
             var factory = new ConnectionFactory() { HostName = "localhost" };
-            using (var connection = factory.CreateConnection())
-            {
-                using (var channel = connection.CreateModel())
-                {
-                    var eventName = @event.GetType().Name;
-                    channel.QueueDeclare(eventName, false, false, false, null);
+            using var connection = factory.CreateConnection();
+            using var channel = connection.CreateModel();
+            var eventName = @event.GetType().Name;
+            channel.QueueDeclare(eventName, false, false, false, null);
 
-                    var message = JsonConvert.SerializeObject(@event);
-                    var body = Encoding.UTF8.GetBytes(message);
+            var message = JsonConvert.SerializeObject(@event);
+            var body = Encoding.UTF8.GetBytes(message);
 
-                    channel.BasicPublish("", eventName, null, body);
-                }
-            }
-
+            channel.BasicPublish("", eventName, null, body);
         }
 
         public void Subscribe<T, THandler>()
