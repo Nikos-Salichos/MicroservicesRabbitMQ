@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Context\" />
     <Folder Include="Repository\" />
   </ItemGroup>
 
@@ -22,6 +21,10 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MicroRabbit.Transfer.Domain\MicroRabbit.Transfer.Domain.csproj" />
   </ItemGroup>
 
 </Project>
