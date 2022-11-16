@@ -20,7 +20,5 @@ namespace MicroRabbit.Transfer.Application.Services
         {
             return _transferRepository.GetTransferLogs();
         }
-
-
     }
 }
