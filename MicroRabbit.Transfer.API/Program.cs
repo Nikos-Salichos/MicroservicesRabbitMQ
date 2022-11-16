@@ -24,7 +24,6 @@ DependencyContainer.Register(builder.Services);
 var connectionString = builder.Configuration.GetConnectionString("TransferDbConnection");
 builder.Services.AddDbContext<TransferDbContext>(x => x.UseSqlServer(connectionString));
 
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
