@@ -17,7 +17,6 @@ namespace MicroRabbit.Transfer.Data.Repository
         {
             return _tranferDbContext.TransferLogs;
         }
-
     }
 }
 
