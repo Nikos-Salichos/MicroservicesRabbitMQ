@@ -15,7 +15,6 @@ namespace MicroRabbit.Transfer.API.Controllers
             _transferService = transferService;
         }
 
-
         [HttpGet]
         public ActionResult<IEnumerable<TransferLog>> GetTransferLogs()
         {
