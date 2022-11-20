@@ -1,5 +1,6 @@
 ﻿using Domain.Core.Bus;
 using MicroRabbit.Transfer.Domain.EventHandlers;
+using MicroRabbit.Transfer.Domain.Events;
 
 namespace MicroRabbit.Transfer.API
 {
