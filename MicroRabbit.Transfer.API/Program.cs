@@ -1,5 +1,7 @@
 using MediatR;
+//using MicroRabbit.Banking.Domain.Events;
 using MicroRabbit.Infrastructure.IoC;
+using MicroRabbit.Transfer.API;
 using MicroRabbit.Transfer.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
@@ -24,7 +26,7 @@ DependencyContainer.Register(builder.Services);
 var connectionString = builder.Configuration.GetConnectionString("TransferDbConnection");
 builder.Services.AddDbContext<TransferDbContext>(x => x.UseSqlServer(connectionString));
 
-var app = builder.Build();
+WebApplication app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -43,3 +45,5 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+ServicesExtensions.ConfigureEventBus(app);
