@@ -110,6 +110,7 @@ namespace Infrastructure.Bus
         {
             if (_handlers.TryGetValue(eventName, out var value))
             {
+                using var scope = _serviceScopeFactory.CreateScope();
                 var subscriptions = _handlers[eventName];
                 foreach (var subscription in subscriptions)
                 {
