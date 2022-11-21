@@ -108,7 +108,7 @@ namespace Infrastructure.Bus
 
         private async Task ProcessEvent(string eventName, string message)
         {
-            if (_handlers.ContainsKey(eventName))
+            if (_handlers.TryGetValue(eventName, out var value))
             {
                 var subscriptions = _handlers[eventName];
                 foreach (var subscription in subscriptions)
