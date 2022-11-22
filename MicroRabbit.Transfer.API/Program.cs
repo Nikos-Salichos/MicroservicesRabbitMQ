@@ -28,6 +28,8 @@ builder.Services.AddDbContext<TransferDbContext>(x => x.UseSqlServer(connectionS
 
 WebApplication app = builder.Build();
 
+ServicesExtensions.ConfigureEventBus(app);
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -46,4 +48,4 @@ app.MapControllers();
 
 app.Run();
 
-ServicesExtensions.ConfigureEventBus(app);
+

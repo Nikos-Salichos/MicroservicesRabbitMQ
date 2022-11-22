@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MicroRabbit.Transfer.Data.Migrations
 {
     [DbContext(typeof(TransferDbContext))]
-    [Migration("20221113180128_Initial Migration")]
+    [Migration("20221122170143_Initial Migration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -35,13 +35,11 @@ namespace MicroRabbit.Transfer.Data.Migrations
                     b.Property<decimal>("Amount")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("FromAccount")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("FromAccount")
+                        .HasColumnType("int");
 
-                    b.Property<string>("ToAccount")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("ToAccount")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

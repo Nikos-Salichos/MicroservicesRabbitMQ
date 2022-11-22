@@ -113,7 +113,7 @@ namespace Infrastructure.Bus
                 var subscriptions = _handlers[eventName];
                 foreach (var subscription in subscriptions)
                 {
-                    object? handler = scope.ServiceProvider.GetService(subscription.GetType());
+                    object? handler = scope.ServiceProvider.GetService(subscription);
                     if (handler == null)
                     {
                         continue;
