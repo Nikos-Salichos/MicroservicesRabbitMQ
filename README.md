@@ -1,3 +1,3 @@
-.NET 6 Project with clean architecture, microservices and RabbitMq.
+.NET 6 Project with  microservices and RabbitMQ.
 
-It contains an example with 2 APIs that are implementing RabbitMQ to communicate.
+It contains an example with 2 APIs that communicate through RabbitMQ.
