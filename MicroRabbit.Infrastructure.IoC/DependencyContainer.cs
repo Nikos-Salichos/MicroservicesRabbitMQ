@@ -50,8 +50,6 @@ namespace MicroRabbit.Infrastructure.IoC
             services.AddTransient<ITransferRepository, TransferRepository>();
             services.AddTransient<BankingDbContext>();
             services.AddTransient<TransferDbContext>();
-
-            //Events
         }
     }
 }
