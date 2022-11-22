@@ -14,6 +14,7 @@ using MicroRabbit.Transfer.Application.Interfaces;
 using MicroRabbit.Transfer.Application.Services;
 using MicroRabbit.Transfer.Data.Context;
 using MicroRabbit.Transfer.Data.Repository;
+using MicroRabbit.Transfer.Domain.EventHandlers;
 using MicroRabbit.Transfer.Domain.Events;
 using MicroRabbit.Transfer.Domain.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
@@ -30,6 +31,9 @@ namespace MicroRabbit.Infrastructure.IoC
                 var scopeFactory = sp.GetService<IServiceScopeFactory>();
                 return new RabbitMQBus(sp.GetService<IMediator>(), scopeFactory);
             });
+
+            //Subscription
+            services.AddTransient<TransferEventHandler>();
 
             //Domain Events
             services.AddTransient<IEventHandler<TransferCreatedEvent>, Transfer.Domain.EventHandlers.TransferEventHandler>();
