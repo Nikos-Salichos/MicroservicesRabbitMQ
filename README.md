@@ -1,6 +1,7 @@
 .NET 6 Project with  microservices and RabbitMQ.
 
-It contains an example with 2 APIs that communicate through RabbitMQ.
+It is an example with 2 APIs that communicate through RabbitMQ.
+Banking API POST a transaction which should appear when you call Transfer API GET.
 
 EF Core guidelines to create the 2 databases:
 
