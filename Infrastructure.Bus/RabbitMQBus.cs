@@ -10,6 +10,7 @@ using System.Text;
 
 namespace Infrastructure.Bus
 {
+    //Rabbit MQ
     public sealed class RabbitMQBus : IEventBus
     {
         private readonly IMediator _mediator;
